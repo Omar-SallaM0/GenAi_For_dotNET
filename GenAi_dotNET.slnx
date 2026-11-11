@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/LLMs/">
+    <Project Path="Text_Completion_Ollama/Text_Completion_Ollama.csproj" Id="44768f66-aa0d-49f7-b197-6b5108c70f31" />
+  </Folder>
+  <Folder Name="/Vectors/">
+    <Project Path="VectorSearch_Ollama/VectorSearch_Ollama.csproj" Id="d99f3236-d494-4850-a1e9-c8c93a70db6d" />
+  </Folder>
+</Solution>
