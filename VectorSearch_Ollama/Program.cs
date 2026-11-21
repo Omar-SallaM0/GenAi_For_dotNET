@@ -1,5 +1,4 @@
-﻿// Create the embedding generator
-using Microsoft.Extensions.AI;
+﻿using Microsoft.Extensions.AI;
 using Microsoft.SemanticKernel.Connectors.InMemory;
 using OllamaSharp;
 using VectorSearch_Ollama;
@@ -7,25 +6,18 @@ using VectorSearch_Ollama;
 IEmbeddingGenerator<string, Embedding<float>> generator =
     new OllamaApiClient(new Uri("http://localhost:11434/"), "all-minilm");
 
-// Create and populate the vector store
+// Create the vector store
 var vectorStore = new InMemoryVectorStore();
-
 var moviesStore = vectorStore.GetCollection<int, Movie>("movies");
 
 await moviesStore.EnsureCollectionExistsAsync();
 
 foreach (var movie in MovieData.Movies)
 {
-    // generate the embedding vector for the movie description
     movie.Vector = await generator.GenerateVectorAsync(movie.Description);
 
-    // add the overall movie to the in-memory vector store's movie collection
     await moviesStore.UpsertAsync(movie);
 }
-
-//1-Embed the user’s query
-//2-Vectorized search
-//3-Returns the records
 
 // generate the embedding vector for the user's prompt
 var query = "I want to see family friendly movie";
